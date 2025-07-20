@@ -4,13 +4,15 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+const authRoutes = require('./routes/auth');
+const itemRoutes = require('./routes/items');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('API AntiqValor online');
-});
+app.use('/api/auth', authRoutes);
+app.use('/api/items', itemRoutes);
 
 const PORT = process.env.PORT || 3001;
 mongoose.connect(process.env.MONGODB_URI)
